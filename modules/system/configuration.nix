@@ -70,38 +70,27 @@
     pulse.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
+environment.systemPackages = with pkgs; [
     zsh
     git
+    efibootmgr
     gcc
     (
       let
         base = pkgs.appimageTools.defaultFhsEnvArgs;
       in
-      pkgs.buildFHSEnv (
-        base
-        // {
-          name = "fhs";
-          targetPkgs =
-            pkgs:
-            (
-              # pkgs.buildFHSUserEnv provides only a minimal FHS environment,
-              # lacking many basic packages needed by most software.
-              # Therefore, we need to add them manually.
-              #
-              # pkgs.appimageTools provides basic packages required by most software.
-              (base.targetPkgs pkgs)
-              ++ (with pkgs; [
-                pkg-config
-                ncurses
-                # Feel free to add more packages here if needed.
-              ])
-            );
-          profile = "export FHS=1";
-          runScript = "zsh";
-          extraOutputsToInstall = [ "dev" ];
-        }
-      )
+        pkgs.buildFHSEnv (
+          base
+          // {
+            name = "fhs";
+            targetPkgs = pkgs:
+            # pkgs.appimageTools provides basic packages required by most software.
+              base.targetPkgs pkgs;
+            profile = "export FHS=1";
+            runScript = "zsh";
+            extraOutputsToInstall = ["dev"];
+          }
+        )
     )
   ];
 

@@ -8,7 +8,8 @@ inputs:
     ../modules/librewolf
     ../modules/gh
     ../modules/catppuccin
-    (import ../modules/spotify inputs)
+    ../modules/spotify
+    {_module.args = {inherit inputs;};}
   ];
 
   dconf = {
@@ -28,10 +29,8 @@ inputs:
 
   programs.brave.enable = true;
   home.packages = with pkgs; [
-    vesktop
-    prismlauncher
-    nodejs-slim
-    bun
+    legcord
+    vlc
     inputs.nixvim.packages.x86_64-linux.default
   ];
 

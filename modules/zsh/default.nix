@@ -8,8 +8,8 @@
 
     shellAliases = {
       upgrade = "sudo nix flake update --flake /etc/nixos";
-      update = "sudo nixos-rebuild switch --show-trace --print-build-logs --verbose --flake /etc/nixos#nixos-laptop";
-      config = "cd /etc/nixos; sudo nvim .";
+      update = "sudo nixos-rebuild switch --flake /etc/nixos#nixos-laptop";
+      config = "cd /etc/nixos; nvim .";
     };
   };
 
