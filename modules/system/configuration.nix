@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -70,7 +72,7 @@
     pulse.enable = true;
   };
 
-environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     zsh
     git
     efibootmgr

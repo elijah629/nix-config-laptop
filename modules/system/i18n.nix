@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   time.timeZone = "America/Los_Angeles";
 
   # Select internationalisation properties.
@@ -23,5 +22,4 @@
     layout = "us";
     variant = "";
   };
-
 }
