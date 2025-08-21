@@ -19,25 +19,27 @@
   };
 
   gtk.enable = true;
-  catppuccin.gtk = {
-    gnomeShellTheme = true;
-    enable = true;
-    icon.enable = true;
-    tweaks = [
-      "rimless"
-    ];
-  };
-
+  
   programs.brave.enable = true;
   home.packages = with pkgs; [
-    legcord
     vlc
-    inputs.nixvim.packages.x86_64-linux.default
+    yt-dlp
+
+    nodejs
+    catppuccin
+
+    rustup
+
+    legcord
+    qFlipper
+
+    markdownlint-cli2 # Markdown LSP
+    marksman
+
+    inputs.toucanvim.packages.${system}.default
   ];
 
   fonts.fontconfig.enable = true;
-
-  nixpkgs.config.allowUnfree = true;
 
   home.stateVersion = "24.05";
 }

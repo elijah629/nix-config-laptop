@@ -1,8 +1,8 @@
 {
-  config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -18,8 +18,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
@@ -81,18 +81,19 @@
       let
         base = pkgs.appimageTools.defaultFhsEnvArgs;
       in
-        pkgs.buildFHSEnv (
-          base
-          // {
-            name = "fhs";
-            targetPkgs = pkgs:
+      pkgs.buildFHSEnv (
+        base
+        // {
+          name = "fhs";
+          targetPkgs =
+            pkgs:
             # pkgs.appimageTools provides basic packages required by most software.
-              base.targetPkgs pkgs;
-            profile = "export FHS=1";
-            runScript = "zsh";
-            extraOutputsToInstall = ["dev"];
-          }
-        )
+            base.targetPkgs pkgs;
+          profile = "export FHS=1";
+          runScript = "zsh";
+          extraOutputsToInstall = [ "dev" ];
+        }
+      )
     )
   ];
 

@@ -7,17 +7,16 @@
     catppuccin.url = "github:catppuccin/nix";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Hyprland (latest git)
-    # hyprland.url = "github:hyprwm/Hyprland";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Neovim setup
-    nixvim.url = "github:elijah629/nix-lazyvim";
-
-    # NUR for firefox addons
-    #nur.url = "github:nix-community/NUR";
+    toucanvim = {
+      url = "github:elijah629/touca.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Spotify addons
     spicetify-nix = {
@@ -30,7 +29,7 @@
     nixpkgs,
     catppuccin,
     home-manager,
-    nixvim,
+    toucanvim,
     spicetify-nix,
     ...
   }: {
