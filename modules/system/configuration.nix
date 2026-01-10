@@ -26,7 +26,6 @@
   home-manager.backupFileExtension = "backup";
 
   programs.dconf.enable = true;
-  programs.zsh.enable = true;
 
   environment.gnome.excludePackages = with pkgs; [
     # baobab      # disk usage analyzer
@@ -73,7 +72,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    zsh
     git
     efibootmgr
     gcc
@@ -90,7 +88,7 @@
             # pkgs.appimageTools provides basic packages required by most software.
             base.targetPkgs pkgs;
           profile = "export FHS=1";
-          runScript = "zsh";
+          runScript = "nu";
           extraOutputsToInstall = [ "dev" ];
         }
       )

@@ -2,15 +2,16 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ../modules/git
-    ../modules/zsh
+    ../modules/nushell
     ../modules/librewolf
     ../modules/gh
     ../modules/catppuccin
     ../modules/spotify
-    {_module.args = {inherit inputs;};}
+    { _module.args = { inherit inputs; }; }
   ];
 
   dconf = {
@@ -19,16 +20,13 @@
   };
 
   gtk.enable = true;
-  
-  programs.brave.enable = true;
+
   home.packages = with pkgs; [
     vlc
     yt-dlp
 
     nodejs
     catppuccin
-
-    rustup
 
     legcord
     qFlipper
