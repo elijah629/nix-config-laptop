@@ -4,7 +4,10 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     # Catppuccin
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home manager
     home-manager = {
@@ -18,9 +21,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Spotify addons
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
+    chatgpt = {
+      url = "github:ilysenko/codex-desktop-linux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    helium = {
+      url = "github:oxcl/nix-flake-helium-browser";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    finamp-flake = {
+      url = "github:elijah629/finamp-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -30,7 +42,7 @@
       nixpkgs,
       catppuccin,
       home-manager,
-      spicetify-nix,
+      helium,
       ...
     }:
     {
@@ -44,6 +56,8 @@
 
             catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
+            helium.nixosModules.default
+
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -53,7 +67,6 @@
                   imports = [
                     ./users/user.nix
                     catppuccin.homeModules.catppuccin
-                    spicetify-nix.homeManagerModules.default
                   ];
                 };
               };

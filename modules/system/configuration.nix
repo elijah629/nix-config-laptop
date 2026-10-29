@@ -27,6 +27,13 @@
 
   programs.dconf.enable = true;
 
+  programs.helium = {
+    enable = true;
+    flags = [
+      "--ozone-platform-hint=auto"
+    ];
+  };
+
   environment.gnome.excludePackages = with pkgs; [
     # baobab      # disk usage analyzer
     cheese # photo booth
@@ -51,7 +58,7 @@
     gnome-logs
     gnome-maps
     gnome-music
-    gnome-photos
+    # gnome-photos
     gnome-screenshot
     gnome-system-monitor
     gnome-weather
@@ -61,6 +68,16 @@
 
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-cove
+  ];
+
+  services.tailscale.enable = true;
+
+  services.udev.packages = [
+    (pkgs.writeTextDir "lib/udev/rules.d/50-numworks-calculator.rules" ''
+      SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="a291", TAG+="uaccess"
+      SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", TAG+="uaccess"
+      SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="a51a", TAG+="uaccess"
+    '')
   ];
 
   services.pulseaudio.enable = false;
